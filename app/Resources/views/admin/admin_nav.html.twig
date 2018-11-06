@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">STSOBŽ</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a href="{{ path('homepage') }}" class="btn-league">Početna</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ path('season_list') }}" class="btn-league">Sezone</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ path('league_list') }}" class="btn-league">Lige</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ path('round_list') }}" class="btn-league">Kola</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ path('gameMatch_list') }}" class="btn-league">Mečevi</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ path('club_list') }}" class="btn-league">Klubovi</a>
+            </li>
+        </ul>
+    </div>
+</nav>

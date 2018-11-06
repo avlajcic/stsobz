@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="wrapper">
+        <div class="container">
+            <div class="row">
+                <a class="btn btn-success" href="{{ path('season_create') }}">Nova sezona</a>
+
+                <table class="table table-dark">
+                    <thead>
+                        <tr>
+                            <th>Ime</th>
+                            <th>Aktivna</th>
+                            <th>Akcija</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for season in seasons %}
+                            <tr>
+                                <td>{{ season.name }}</td>
+                                <td>
+                                    {% if season.active %}
+                                        DA
+                                    {% else %}
+                                        NE
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a class="btn btn-primary" href="{{ path('season_edit', {'id': season.id}) }}">Uredi</a>
+                                    <a class="btn btn-danger" href="{{ path('season_delete', {'id': season.id}) }}">Obriši</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}

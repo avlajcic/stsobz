@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="wrapper">
+        <div class="container">
+            <div class="row">
+                <a class="btn btn-success" href="{{ path('gameMatch_create') }}">Novi meč</a>
+                <table class="table table-dark">
+                    <thead>
+                        <tr>
+                            <th>Domaći klub</th>
+                            <th>Gostujući klub</th>
+                            <th>Kolo</th>
+                            <th>Sezona</th>
+                            <th>Akcija</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for gameMatch in gameMatches %}
+                            <tr>
+                                <td>{{ gameMatch.homeClub.name }}</td>
+                                <td>{{ gameMatch.awayClub.name }}</td>
+                                <td>{{ gameMatch.round.name }}</td>
+                                <td>{{ gameMatch.round.season.name }}</td>
+                                <td>
+                                    <a class="btn btn-primary" href="{{ path('gameMatch_edit', {'id': gameMatch.id}) }}">Uredi</a>
+                                    <a class="btn btn-danger" href="{{ path('gameMatch_delete', {'id': gameMatch.id}) }}">Obriši</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}

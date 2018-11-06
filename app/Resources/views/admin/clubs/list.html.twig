@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="wrapper">
+        <div class="container">
+            <div class="row">
+                <a class="btn btn-success" href="{{ path('club_create') }}">Novi klub</a>
+                <table class="table table-dark">
+                    <thead>
+                        <tr>
+                            <th>Ime</th>
+                            <th>Liga</th>
+                            <th>Akcija</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for club in clubs %}
+                            <tr>
+                                <td>{{ club.name }}</td>
+                                <td>{{ club.league.name }}</td>
+                                <td>
+                                    <a class="btn btn-primary" href="{{ path('club_edit', {'id': club.id}) }}">Uredi</a>
+                                    <a class="btn btn-danger" href="{{ path('club_delete', {'id': club.id}) }}">Obriši</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}

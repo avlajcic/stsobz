@@ -2,21 +2,13 @@
 
 {% block body %}
     <div id="wrapper">
-        <div class  ="container">
-            <div class="row">
-                <div class="offset-10">
-                    {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
-                        <a href="{{ path('fos_user_security_login') }}">Prijavi se</a>
-                    {% else %}
-                        <a href="#">Admin sučelje</a>
-                    {% endif %}
-                </div>
-            </div>
+        <div class="container">
             <div class="row" style="margin-top:50px">
                 <div class="col">
-                {% for league in leagues %}
-                    <button id="league_{{ league.id }}" class="btn btn-default btn-league">{{ league.name }}</button>
-                {% endfor %}
+                    {% for league in leagues %}
+                        <button id="league_{{ league.id }}"
+                                class="btn btn-default btn-league">{{ league.name }}</button>
+                    {% endfor %}
                 </div>
             </div>
 

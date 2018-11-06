@@ -1,3 +1,11 @@
 .btn-league{
     margin-left: 20px;
 }
+
+table{
+    margin-top: 15px;
+}
+
+input, label, select {
+    display:block;
+}

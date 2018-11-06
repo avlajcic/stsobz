@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-8">
+                    {{ form_start(form) }}
+
+                    <div class="form-group">
+                        {{ form_label(form.homeClub) }}
+                        {{ form_errors(form.homeClub) }}
+                        {{ form_widget(form.homeClub, {'attr': {'class': 'form-control'} }) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_label(form.awayClub) }}
+                        {{ form_errors(form.awayClub) }}
+                        {{ form_widget(form.awayClub, {'attr': {'class': 'form-control'} }) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_label(form.round) }}
+                        {{ form_errors(form.round) }}
+                        {{ form_widget(form.round, {'attr': {'class': 'form-control'} }) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_label(form.homeClubScore) }}
+                        {{ form_errors(form.homeClubScore) }}
+                        {{ form_widget(form.homeClubScore, {'attr': {'class': 'form-control'} }) }}
+
+                        {{ form_label(form.awayClubScore) }}
+                        {{ form_errors(form.awayClubScore) }}
+                        {{ form_widget(form.awayClubScore, {'attr': {'class': 'form-control'} }) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_label(form.submitBtn) }}
+                        {{ form_widget(form.submitBtn, {'attr': {'class': 'btn btn-success'} }) }}
+                    </div>
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#round_season').select2();
+            $('#round_league').select2();
+        });
+    </script>
+{% endblock %}

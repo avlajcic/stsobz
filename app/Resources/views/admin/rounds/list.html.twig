@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="wrapper">
+        <div class="container">
+            <div class="row">
+                <a class="btn btn-success" href="{{ path('round_create') }}">Novo kolo</a>
+                <table class="table table-dark">
+                    <thead>
+                        <tr>
+                            <th>Ime</th>
+                            <th>Sezona</th>
+                            <th>Liga</th>
+                            <th>Akcija</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for round in rounds %}
+                            <tr>
+                                <td>{{ round.name }}</td>
+                                <td>{{ round.season.name }}</td>
+                                <td>{{ round.league.name }}</td>
+                                <td>
+                                    <a class="btn btn-primary" href="{{ path('round_edit', {'id': round.id}) }}">Uredi</a>
+                                    <a class="btn btn-danger" href="{{ path('round_delete', {'id': round.id}) }}">Obriši</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}

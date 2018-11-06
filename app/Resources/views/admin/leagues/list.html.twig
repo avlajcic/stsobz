@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="wrapper">
+        <div class="container">
+            <div class="row">
+                <a class="btn btn-success" href="{{ path('league_create') }}">Nova liga</a>
+                <table class="table table-dark">
+                    <thead>
+                        <tr>
+                            <th>Ime</th>
+                            <th>Akcija</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for league in leagues %}
+                            <tr>
+                                <td>{{ league.name }}</td>
+                                <td>
+                                    <a class="btn btn-primary" href="{{ path('league_edit', {'id': league.id}) }}">Uredi</a>
+                                    <a class="btn btn-danger" href="{{ path('league_delete', {'id': league.id}) }}">Obriši</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}
