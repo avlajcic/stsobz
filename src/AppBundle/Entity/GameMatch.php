@@ -54,6 +54,12 @@ class GameMatch
     private $round;
 
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="file", type="string", nullable=true)
+     */
+    private $file;
 
 
     /**
@@ -184,5 +190,29 @@ class GameMatch
     public function getRound()
     {
         return $this->round;
+    }
+
+    /**
+     * Set file
+     *
+     * @param string $file
+     *
+     * @return GameMatch
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
+
+        return $this;
+    }
+
+    /**
+     * Get file
+     *
+     * @return string
+     */
+    public function getFile()
+    {
+        return $this->file;
     }
 }

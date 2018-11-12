@@ -9,3 +9,11 @@ table{
 input, label, select {
     display:block;
 }
+
+.game-match-img {
+    max-width: 200px;
+}
+
+.clickable-row {
+    cursor: pointer;
+}

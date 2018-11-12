@@ -10,4 +10,65 @@ namespace AppBundle\Repository;
  */
 class GameMatchRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getClubsHomeStatsForClubsInSeason($league, $season, $clubs)
+    {
+        $queryBuilder = $this->_em->createQueryBuilder();
+
+        $queryBuilder->select(
+            'SUM(CASE WHEN gm.homeClub IN (:clubs) THEN gm.homeClubScore ELSE 0 END) AS totalHomeWon,'.
+            'SUM(CASE WHEN gm.homeClub IN (:clubs) THEN gm.awayClubScore ELSE 0 END) AS totalHomeLost,'.
+            'SUM(CASE WHEN gm.homeClub IN (:clubs) AND gm.homeClubScore > gm.awayClubScore THEN 2 ELSE 1 END) AS totalHomePoints,'.
+             'hc.name')
+            ->from('AppBundle:GameMatch', 'gm')
+            ->join('gm.round', 'r')
+            ->join('gm.homeClub', 'hc')
+            ->where('r.league = :league')
+            ->andWhere('r.season = :season')
+            ->setParameter('clubs', $clubs)
+            ->setParameter('season', $season)
+            ->setParameter('league', $league)
+            ->groupBy('hc')
+        ;
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
+    public function getClubsAwayStatsForClubsInSeason($league, $season, $clubs)
+    {
+        $queryBuilder = $this->_em->createQueryBuilder();
+
+        $queryBuilder->select(
+            'SUM(CASE WHEN gm.awayClub IN (:clubs) THEN gm.awayClubScore ELSE 0 END) AS totalAwayWon,'.
+            'SUM(CASE WHEN gm.awayClub IN (:clubs) THEN gm.homeClubScore ELSE 0 END) AS totalAwayLost,'.
+            'SUM(CASE WHEN gm.awayClub IN (:clubs) AND gm.homeClubScore < gm.awayClubScore THEN 2 ELSE 1 END) AS totalAwayPoints,'.
+            'ac.name')
+            ->from('AppBundle:GameMatch', 'gm')
+            ->join('gm.round', 'r')
+            ->join('gm.awayClub', 'ac')
+            ->where('r.league = :league')
+            ->andWhere('r.season = :season')
+            ->setParameter('clubs', $clubs)
+            ->setParameter('season', $season)
+            ->setParameter('league', $league)
+            ->groupBy('ac')
+        ;
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
+    public function getGameMatchesInSeasonAndLeague($league, $season)
+    {
+        $queryBuilder = $this->_em->createQueryBuilder();
+
+        $queryBuilder->select('gm')
+            ->from('AppBundle:GameMatch', 'gm')
+            ->join('gm.round', 'r')
+            ->where('r.season = :season')
+            ->andWhere('r.league = :league')
+//            ->groupBy('r')
+            ->setParameter('season', $season)
+            ->setParameter('league', $league);
+
+        return $queryBuilder->getQuery()->getResult();
+    }
 }

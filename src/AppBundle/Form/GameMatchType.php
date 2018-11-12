@@ -5,9 +5,11 @@ namespace AppBundle\Form;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class GameMatchType extends AbstractType
 {
@@ -40,8 +42,19 @@ class GameMatchType extends AbstractType
         ))->add('awayClubScore', NumberType::class, array(
             'required' => true,
             'label' => 'Rezultat gostujućeg kluba'
+        ))->add('file', FileType::class, array(
+            'label' => 'Datoteka',
+            'required' => false,
+            'empty_data' => $options['file']
         ))->add('submitBtn', SubmitType::class, array(
             'label' => 'Spremi'
         ));
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        parent::configureOptions($resolver);
+
+        $resolver->setRequired('file');
     }
 }

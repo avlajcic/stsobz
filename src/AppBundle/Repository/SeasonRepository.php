@@ -10,4 +10,17 @@ namespace AppBundle\Repository;
  */
 class SeasonRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function getActiveSeason()
+    {
+        $queryBuilder = $this->_em->createQueryBuilder();
+
+        $queryBuilder->select('s')
+            ->from('AppBundle:Season', 's')
+            ->where('s.active = 1');
+
+        return $queryBuilder->getQuery()->getOneOrNullResult();
+    }
 }
