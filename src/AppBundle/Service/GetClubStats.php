@@ -74,6 +74,8 @@ class GetClubStats
             $result[$key]['totalLostPoints'] = $club['totalHomeLostPoints'];
             $result[$key]['name'] = $club['name'];
         }
+//        dump($firstClubArray1);
+//        dump($result['Kralj Tomislav']);
         foreach ($firstClubArray2 as $club) {
             $key = $club['name'];
             if (!isset($result[$key])) {
@@ -92,6 +94,10 @@ class GetClubStats
             $result[$key]['totalLostPoints'] += $club['totalAwayLostPoints'];
         }
 
+
+//        dump($firstClubArray2);
+//        dump($result['Kralj Tomislav']);
+//        die();
         usort(
             $result,
             function ($firstClub, $secondClub) {

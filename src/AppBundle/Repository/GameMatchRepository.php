@@ -17,7 +17,8 @@ class GameMatchRepository extends \Doctrine\ORM\EntityRepository
         $queryBuilder->select(
             'SUM(CASE WHEN gm.homeClub IN (:clubs) THEN gm.homeClubScore ELSE 0 END) AS totalHomeWonPoints,'.
             'SUM(CASE WHEN gm.homeClub IN (:clubs) THEN gm.awayClubScore ELSE 0 END) AS totalHomeLostPoints,'.
-            'SUM(CASE WHEN gm.homeClub IN (:clubs) AND gm.homeClubScore > gm.awayClubScore THEN 2 ELSE 1 END) AS totalHomePoints,'.
+            'SUM(CASE WHEN gm.homeClub IN (:clubs) AND gm.homeClubScore > gm.awayClubScore THEN 2 WHEN 
+             gm.homeClub IN (:clubs) AND gm.homeClubScore < gm.awayClubScore THEN 1 ELSE 0 END) AS totalHomePoints,'.
             'SUM(CASE WHEN gm.homeClub IN (:clubs) AND gm.homeClubScore > gm.awayClubScore THEN 1 ELSE 0 END) AS totalHomeWon,'.
             'SUM(CASE WHEN gm.homeClub IN (:clubs) AND gm.homeClubScore < gm.awayClubScore THEN 1 ELSE 0 END) AS totalHomeLost,'.
              'hc.name')
@@ -42,7 +43,8 @@ class GameMatchRepository extends \Doctrine\ORM\EntityRepository
         $queryBuilder->select(
             'SUM(CASE WHEN gm.awayClub IN (:clubs) THEN gm.awayClubScore ELSE 0 END) AS totalAwayWonPoints,'.
             'SUM(CASE WHEN gm.awayClub IN (:clubs) THEN gm.homeClubScore ELSE 0 END) AS totalAwayLostPoints,'.
-            'SUM(CASE WHEN gm.awayClub IN (:clubs) AND gm.homeClubScore < gm.awayClubScore THEN 2 ELSE 1 END) AS totalAwayPoints,'.
+            'SUM(CASE WHEN gm.awayClub IN (:clubs) AND gm.homeClubScore < gm.awayClubScore THEN 2 WHEN 
+             gm.homeClub IN (:clubs) AND gm.homeClubScore > gm.awayClubScore THEN 1 ELSE 0 END) AS totalAwayPoints,'.
             'SUM(CASE WHEN gm.awayClub IN (:clubs) AND gm.homeClubScore < gm.awayClubScore THEN 1 ELSE 0 END) AS totalAwayWon,'.
             'SUM(CASE WHEN gm.awayClub IN (:clubs) AND gm.homeClubScore > gm.awayClubScore THEN 1 ELSE 0 END) AS totalAwayLost,'.
             'ac.name')

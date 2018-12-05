@@ -17,3 +17,12 @@ input, label, select {
 .clickable-row {
     cursor: pointer;
 }
+
+.data-table {
+    color: black;
+    clear: none !important;
+}
+
+.data-table >  thead > tr > th {
+    color: white;
+}

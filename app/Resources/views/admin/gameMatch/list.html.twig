@@ -4,13 +4,14 @@
     <div id="wrapper">
         <div class="container">
             <div class="row">
-                <a class="btn btn-success" href="{{ path('gameMatch_create') }}">Novi meč</a>
-                <table class="table table-dark">
+                {#<a class="btn btn-success" href="{{ path('gameMatch_create') }}">Novi meč</a>#}
+                <table class="table table-dark data-table" id="game-match-table">
                     <thead>
                         <tr>
                             <th>Domaći klub</th>
                             <th>Gostujući klub</th>
                             <th>Kolo</th>
+                            <th>Liga</th>
                             <th>Sezona</th>
                             <th>Akcija</th>
                         </tr>
@@ -21,6 +22,7 @@
                                 <td>{{ gameMatch.homeClub.name }}</td>
                                 <td>{{ gameMatch.awayClub.name }}</td>
                                 <td>{{ gameMatch.round.name }}</td>
+                                <td>{{ gameMatch.round.league.name }}</td>
                                 <td>{{ gameMatch.round.season.name }}</td>
                                 <td>
                                     <a class="btn btn-primary" href="{{ path('gameMatch_edit', {'id': gameMatch.id}) }}">Uredi</a>
@@ -30,11 +32,39 @@
                         {% endfor %}
                     </tbody>
                 </table>
+                {#<table id="table_id" class="display">#}
+                    {#<thead>#}
+                    {#<tr>#}
+                        {#<th>Column 1</th>#}
+                        {#<th>Column 2</th>#}
+                    {#</tr>#}
+                    {#</thead>#}
+                    {#<tbody>#}
+                    {#<tr>#}
+                        {#<td>Row 1 Data 1</td>#}
+                        {#<td>Row 1 Data 2</td>#}
+                    {#</tr>#}
+                    {#<tr>#}
+                        {#<td>Row 2 Data 1</td>#}
+                        {#<td>Row 2 Data 2</td>#}
+                    {#</tr>#}
+                    {#</tbody>#}
+                {#</table>#}
             </div>
         </div>
     </div>
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready( function () {
+            $('#game-match-table').DataTable();
+        } );
+    </script>
 {% endblock %}
 
 {% block stylesheets %}
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+{% endblock %}
+
+{% block javascripts %}
 
 {% endblock %}
