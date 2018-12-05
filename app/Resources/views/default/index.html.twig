@@ -28,7 +28,8 @@
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Ime</th>
-                                        <th scope="col">Rezultat</th>
+                                        <th scope="col">Pobjede / Porazi</th>
+                                        <th scope="col">Osvojeni / izgubljeni mečevi</th>
                                         <th scope="col">Bodovi</th>
                                     </tr>
                                     </thead>
@@ -37,8 +38,12 @@
                                         <tr>
                                             <th scope="row">{{ loop.index }}</th>
                                             <td>{{ clubLeagueStats['name'] }}</td>
-                                            <td>{{ clubLeagueStats['totalWon'] }}
-                                                :{{ clubLeagueStats['totalLost'] }}</td>
+                                            <td>
+                                                {{ clubLeagueStats['totalWon'] }} : {{ clubLeagueStats['totalLost'] }}
+                                            </td>
+                                            <td>
+                                                {{ clubLeagueStats['totalWonPoints'] }} : {{ clubLeagueStats['totalLostPoints'] }}
+                                            </td>
                                             <td>{{ clubLeagueStats['totalPoints'] }}</td>
                                         </tr>
                                     {% endfor %}
@@ -80,8 +85,9 @@
                                                         <th scope="row">{{ loop.index }}</th>
                                                         <td>{{ gameMatch.homeClub.name }}</td>
                                                         <td>{{ gameMatch.awayClub.name }}</td>
-                                                        <td>{{ gameMatch.homeClubScore }}
-                                                            :{{ gameMatch.awayClubScore }}</td>
+                                                        <td>
+                                                            {{ gameMatch.homeClubScore }} : {{ gameMatch.awayClubScore }}
+                                                        </td>
                                                     </tr>
                                                 {% endfor %}
                                             </table>
