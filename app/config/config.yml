@@ -1,8 +1,8 @@
 imports:
     - { resource: security.yml }
     - { resource: services.yml }
-    - { resource: production_parameters.php }
-#    - { resource: parameters.yml }
+#    - { resource: production_parameters.php }
+    - { resource: parameters.yml }
 
 
 # Put parameters here that don't need to change on each machine where the app is deployed
