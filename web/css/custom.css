@@ -23,6 +23,11 @@ input, label, select {
     clear: none !important;
 }
 
-.data-table >  thead > tr > th {
+.data-table >  thead > tr > th, #game-match-table_wrapper > div > label {
     color: white;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    background-color: white !important;
+    border-color: white !important;
 }
