@@ -26,9 +26,8 @@ class GameMatchController extends Controller
     public function indexAction(EntityManagerInterface $em)
     {
         $gameMatches = $em->getRepository('AppBundle:GameMatch')->findAll();
-        // replace this example code with whatever you need
+
         return $this->render('admin/gameMatch/list.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
             'gameMatches' => $gameMatches,
         ]);
     }

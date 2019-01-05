@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Service\GetClubStats;
 use AppBundle\Service\GetLeagueRoundsInfo;
+use AppBundle\Service\StatsService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,24 +16,24 @@ class DefaultController extends Controller
      * @Route("/", name="homepage")
      * @param Request $request
      * @param EntityManagerInterface $em
-     * @param GetClubStats $getClubStats
-     * @param GetLeagueRoundsInfo $leagueRoundsInfo
+     * @param StatsService $statsService
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function indexAction(Request $request, EntityManagerInterface $em, GetClubStats $getClubStats, GetLeagueRoundsInfo $leagueRoundsInfo)
+    public function indexAction(Request $request, EntityManagerInterface $em, StatsService $statsService)
     {
         $leagues = $em->getRepository('AppBundle:League')->findAll();
-        $clubStats = $getClubStats->getStats($leagues);
 
-        $roundsInfo = $leagueRoundsInfo->getRoundsInfo($leagues);
+        $clubStats = $statsService->getClubStats($leagues);
+        $roundsInfo = $statsService->getRoundsInfo($leagues);
+        $playersInfo = $statsService->getPlayersInfo($leagues);
 
-        // replace this example code with whatever you need
+
         return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
             'leagues' => $leagues,
             'clubStats' => $clubStats,
-            'roundInfo' => $roundsInfo
+            'roundInfo' => $roundsInfo,
+            'playersInfo' => $playersInfo
         ]);
     }
 

@@ -40,7 +40,10 @@ class Season
      */
     private $rounds;
 
-
+    /**
+     * @ORM\OneToMany(targetEntity="PlayerScore", mappedBy="league")
+     */
+    private $playerScores;
 
     /**
      * Constructor
@@ -48,6 +51,7 @@ class Season
     public function __construct()
     {
         $this->rounds = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->playerScores = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -140,5 +144,39 @@ class Season
     public function getRounds()
     {
         return $this->rounds;
+    }
+
+    /**
+     * Add playerScore
+     *
+     * @param PlayerScore $playerScore
+     *
+     * @return Season
+     */
+    public function addPlayerScore(PlayerScore $playerScore)
+    {
+        $this->playerScores[] = $playerScore;
+
+        return $this;
+    }
+
+    /**
+     * Remove playerScore
+     *
+     * @param PlayerScore $playerScore
+     */
+    public function removePlayerScore(PlayerScore $playerScore)
+    {
+        $this->playerScores->removeElement($playerScore);
+    }
+
+    /**
+     * Get playerScores
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPlayerScores()
+    {
+        return $this->playerScores;
     }
 }

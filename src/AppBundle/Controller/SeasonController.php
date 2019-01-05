@@ -26,9 +26,8 @@ class SeasonController extends Controller
     public function indexAction(Request $request, EntityManagerInterface $em)
     {
         $seasons = $em->getRepository('AppBundle:Season')->findAll();
-        // replace this example code with whatever you need
+
         return $this->render('admin/seasons/list.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
             'seasons' => $seasons,
         ]);
     }

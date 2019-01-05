@@ -23,6 +23,7 @@
                          style="margin-top:50px" id="league{{ league.id }}" role="tabpanel">
                         <div class="row">
                             <div class="col">
+                                <h4>Tablica</h4>
                                 <table class="table table-dark">
                                     <thead>
                                     <tr>
@@ -42,7 +43,8 @@
                                                 {{ clubLeagueStats['totalWon'] }} : {{ clubLeagueStats['totalLost'] }}
                                             </td>
                                             <td>
-                                                {{ clubLeagueStats['totalWonPoints'] }} : {{ clubLeagueStats['totalLostPoints'] }}
+                                                {{ clubLeagueStats['totalWonPoints'] }}
+                                                : {{ clubLeagueStats['totalLostPoints'] }}
                                             </td>
                                             <td>{{ clubLeagueStats['totalPoints'] }}</td>
                                         </tr>
@@ -65,6 +67,7 @@
                         </div>
                         <div class="row">
                             <div class="col tab-content">
+                                <h4>Kola</h4>
                                 {% for round in roundInfo[league.id] %}
                                     <div class="tab-pane fade row {% if loop.index0 == 0 %}show active {% endif %}"
                                          id="round{{ round.id }}" role="tabpanel">
@@ -86,7 +89,8 @@
                                                         <td>{{ gameMatch.homeClub.name }}</td>
                                                         <td>{{ gameMatch.awayClub.name }}</td>
                                                         <td>
-                                                            {{ gameMatch.homeClubScore }} : {{ gameMatch.awayClubScore }}
+                                                            {{ gameMatch.homeClubScore }}
+                                                            : {{ gameMatch.awayClubScore }}
                                                         </td>
                                                     </tr>
                                                 {% endfor %}
@@ -94,6 +98,35 @@
                                         </div>
                                     </div>
                                 {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <h4>Igrači</h4>
+                                <table class="table table-dark">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Ime</th>
+                                        <th scope="col">Odigrane</th>
+                                        <th scope="col">Pobjede</th>
+                                        <th scope="col">Porazi</th>
+                                        <th scope="col">Postotak</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for playerScore in playersInfo[league.id] %}
+                                        <tr>
+                                            <th scope="row">{{ loop.index }}</th>
+                                            <td>{{ playerScore.name }}</td>
+                                            <td>{{ playerScore.won + playerScore.lost }}</td>
+                                            <td>{{ playerScore.won }}</td>
+                                            <td>{{ playerScore.lost }}</td>
+                                            <td>{{ (playerScore.won / (playerScore.won + playerScore.lost) * 100)|number_format(2, '.', ',') }}%</td>
+                                        </tr>
+                                    {% endfor %}
+                                </table>
                             </div>
                         </div>
                     </div>

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="wrapper">
+        <div class="container">
+            <div class="row">
+                <a class="btn btn-success" href="{{ path('player_score_create') }}">Novi igrač</a>
+                <table class="table table-dark">
+                    <thead>
+                        <tr>
+                            <th>Ime</th>
+                            <th>Sezona</th>
+                            <th>Liga</th>
+                            <th>Akcija</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for playerScore in playerScores %}
+                            <tr>
+                                <td>{{ playerScore.name }}</td>
+                                <td>{{ playerScore.season.name }}</td>
+                                <td>{{ playerScore.league.name }}</td>
+                                <td>
+                                    <a class="btn btn-primary" href="{{ path('player_score_edit', {'id': playerScore.id}) }}">Uredi</a>
+                                    <a class="btn btn-danger" href="{{ path('player_score_delete', {'id': playerScore.id}) }}">Obriši</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}

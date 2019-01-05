@@ -2,32 +2,31 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\League;
-use AppBundle\Form\LeagueType;
+use AppBundle\Entity\PlayerScore;
+use AppBundle\Form\GameMatchType;
+use AppBundle\Form\PlayerScoreType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class AdminController
  * @package AppBundle\Controller
- * @Route("/admin/leagues", name="league_")
+ * @Route("/admin/player-scores", name="player_score_")
  */
-class LeagueController extends Controller
+class PlayerScoreController extends Controller
 {
     /**
      * @Route("/", name="list")
-     * @param Request $request
      * @param EntityManagerInterface $em
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction(Request $request, EntityManagerInterface $em)
+    public function indexAction(EntityManagerInterface $em)
     {
-        $leagues = $em->getRepository('AppBundle:League')->findAll();
+        $playerScores = $em->getRepository('AppBundle:PlayerScore')->findAll();
 
-        return $this->render('admin/leagues/list.html.twig', [
-            'leagues' => $leagues,
+        return $this->render('admin/playerScore/list.html.twig', [
+            'playerScores' => $playerScores,
         ]);
     }
 
@@ -39,69 +38,68 @@ class LeagueController extends Controller
      */
     public function createAction(EntityManagerInterface $em, Request $request)
     {
-        $league = new League();
-        $form = $this->createForm(LeagueType::class, $league, array(
-        ));
+        $playerScore = new PlayerScore();
+        $form = $this->createForm(PlayerScoreType::class, $playerScore, array());
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
-            $em->persist($league);
+
+            $em->persist($playerScore);
             $em->flush();
             return $this->redirect(
-                $this->generateUrl('league_list')
+                $this->generateUrl('player_score_list')
             );
         }
 
-        return $this->render('admin/leagues/create.html.twig', array(
+        return $this->render('admin/playerScore/create.html.twig', array(
             'form' => $form->createView()
         ));
     }
 
     /**
      * @Route("/{id}/edit", name="edit")
-     * @param League $league
+     * @param PlayerScore $playerScore
      * @param EntityManagerInterface $em
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function editAction(League $league, EntityManagerInterface $em, Request $request)
+    public function editAction(PlayerScore $playerScore, EntityManagerInterface $em, Request $request)
     {
-        $form = $this->createForm(LeagueType::class, $league, array(
-        ));
+        $form = $this->createForm(PlayerScoreType::class, $playerScore, array());
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $em->persist($league);
+            $em->persist($playerScore);
             $em->flush();
 
             return $this->redirect(
-                $this->generateUrl('league_list')
+                $this->generateUrl('player_score_list')
             );
         }
 
-        return $this->render('admin/leagues/create.html.twig', array(
-            'form' => $form->createView()
+        return $this->render('admin/playerScore/create.html.twig', array(
+            'form' => $form->createView(),
+            'playerScore' => $playerScore
         ));
     }
 
     /**
      * @Route("/{id}/delete", name="delete")
-     * @param League $league
+     * @param PlayerScore $playerScore
      * @param EntityManagerInterface $em
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function deleteAction(League $league, EntityManagerInterface $em)
+    public function deleteAction(PlayerScore $playerScore, EntityManagerInterface $em)
     {
 
-        $em->remove($league);
+        $em->remove($playerScore);
         $em->flush();
 
         return $this->redirect(
-            $this->generateUrl('league_list')
+            $this->generateUrl('player_score_list')
         );
 
     }

@@ -24,9 +24,8 @@ class ClubController extends Controller
     public function indexAction(EntityManagerInterface $em)
     {
         $clubs = $em->getRepository('AppBundle:Club')->findAll();
-        // replace this example code with whatever you need
+
         return $this->render('admin/clubs/list.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
             'clubs' => $clubs,
         ]);
     }
