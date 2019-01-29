@@ -18,7 +18,7 @@ class DefaultController extends Controller
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function indexAction(Request $request, EntityManagerInterface $em, StatsService $statsService)
+    public function indexAction(Request $request, EntityManagerInterface $em, StatsService $statsService = null)
     {
         $leagues = $em->getRepository('AppBundle:League')->findAll();
 
