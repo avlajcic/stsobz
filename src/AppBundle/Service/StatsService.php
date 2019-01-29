@@ -155,7 +155,7 @@ class StatsService
         usort(
             $players,
             function ($firstPlayer, $secondPlayer) {
-                return ($secondPlayer->getWon() - $secondPlayer->getLost()) - ($firstPlayer->getWon() - $firstPlayer->getLost());
+                return $secondPlayer->getWon() - $firstPlayer->getWon();
             }
         );
 
