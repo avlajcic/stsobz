@@ -155,6 +155,10 @@ class StatsService
         usort(
             $players,
             function ($firstPlayer, $secondPlayer) {
+                if ($secondPlayer->getWon() == $firstPlayer->getWon())
+                    // sort by lowest number of loses if wins are same
+                    return $firstPlayer->getLost() - $secondPlayer->getLost();
+                // sort by highest number of wins
                 return $secondPlayer->getWon() - $firstPlayer->getWon();
             }
         );
