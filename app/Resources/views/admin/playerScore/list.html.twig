@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row">
                 <a class="btn btn-success" href="{{ path('player_score_create') }}">Novi igrač</a>
-                <table class="table table-dark">
+                <table id="player-score-table" class="table table-dark data-table">
                     <thead>
                         <tr>
                             <th>Ime</th>
@@ -34,5 +34,14 @@
 {% endblock %}
 
 {% block stylesheets %}
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+{% endblock %}
 
+{% block javascripts %}
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready( function () {
+            $('#player-score-table').DataTable();
+        } );
+    </script>
 {% endblock %}

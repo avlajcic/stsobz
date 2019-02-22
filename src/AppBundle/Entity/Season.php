@@ -41,7 +41,7 @@ class Season
     private $rounds;
 
     /**
-     * @ORM\OneToMany(targetEntity="PlayerScore", mappedBy="league")
+     * @ORM\OneToMany(targetEntity="PlayerScore", mappedBy="season")
      */
     private $playerScores;
 

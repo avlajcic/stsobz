@@ -23,7 +23,7 @@ input, label, select {
     clear: none !important;
 }
 
-.data-table >  thead > tr > th, #game-match-table_wrapper > div > label {
+.data-table >  thead > tr > th, div > div > label {
     color: white;
 }
 
