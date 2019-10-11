@@ -3,11 +3,12 @@
 namespace AppBundle\Service;
 
 
+use AppBundle\Entity\Document;
 use AppBundle\Entity\GameMatch;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class UploadGameMatchFile
+class UploadFileService
 {
     private $em;
 
@@ -21,7 +22,7 @@ class UploadGameMatchFile
      * @param string $uploadsDir
      * @return bool
      */
-    public function uploadFile($gameMatch, $uploadsDir)
+    public function uploadGameMatchFile($gameMatch, $uploadsDir)
     {
         /** @var UploadedFile|$uploadedFile */
         $uploadedFile = $gameMatch->getFile();
@@ -31,12 +32,38 @@ class UploadGameMatchFile
         if ($uploadedFile instanceof UploadedFile) {
             $fileName = $uploadedFile->getClientOriginalName();
             $fileName = str_replace(' ', '_', $fileName);
-//            $extension = substr(strrchr($fileName, '.'), 1);
 
             $uploadedFile->move($uploadsDir, $timestamp . '_' . $fileName);
             $fileName = $timestamp . '_' . $fileName;
 
             $gameMatch->setFile(DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $fileName);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param Document $document
+     * @param string $uploadsDir
+     * @return bool
+     */
+    public function uploadDocumentFile($document, $uploadsDir)
+    {
+        /** @var UploadedFile|$uploadedFile */
+        $uploadedFile = $document->getPath();
+        $date = new \DateTime();
+        $timestamp = $date->format('Ydm-His');
+
+        if ($uploadedFile instanceof UploadedFile) {
+            $fileName = $uploadedFile->getClientOriginalName();
+            $fileName = str_replace(' ', '_', $fileName);
+
+            $uploadedFile->move($uploadsDir, $timestamp . '_' . $fileName);
+            $fileName = $timestamp . '_' . $fileName;
+
+            $document->setPath(DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $fileName);
 
             return true;
         }

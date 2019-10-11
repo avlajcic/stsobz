@@ -1,3 +1,6 @@
+body{
+    background-color: #424950;
+}
 .btn-league{
     margin-left: 20px;
 }
@@ -30,4 +33,8 @@ input, label, select {
 .dataTables_wrapper .dataTables_paginate .paginate_button {
     background-color: white !important;
     border-color: white !important;
+}
+
+.table-dark{
+    background-color: #3f4348;
 }

@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-8">
+                    {{ form_start(form) }}
+
+                    <div class="form-group">
+                        {{ form_label(form.name) }}
+                        {{ form_errors(form.name) }}
+                        {{ form_widget(form.name, {'attr': {'class': 'form-control'} }) }}
+                    </div>
+
+                    {% if document is defined %}
+                        <a href="{{ document.path }}" download>{{ document.name }}</a>
+                    {% endif %}
+                    <div class="form-group">
+                        {{ form_label(form.path) }}
+                        {{ form_errors(form.path) }}
+                        {{ form_widget(form.path, {'attr': {'class': 'form-control'} }) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_label(form.submitBtn) }}
+                        {{ form_widget(form.submitBtn, {'attr': {'class': 'btn btn-success'} }) }}
+                    </div>
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
