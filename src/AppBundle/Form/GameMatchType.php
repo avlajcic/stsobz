@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use AppBundle\Repository\RoundRepository;
 
 class GameMatchType extends AbstractType
 {
@@ -35,7 +36,12 @@ class GameMatchType extends AbstractType
             },
             'multiple' => false,
             'required' => true,
-            'label' => 'Kolo'
+            'label' => 'Kolo',
+            'query_builder' => function (RoundRepository $er) {
+                    return $er->createQueryBuilder('r')
+                      ->join('r.season', 's')
+                      ->where('s.active = true');
+                }
         ))->add('homeClubScore', NumberType::class, array(
             'required' => true,
             'label' => 'Rezultat domaćeg kluba'
